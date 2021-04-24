@@ -1,8 +1,8 @@
 {% extends 'ecom/base.html' %}
 {% block body %}
     <div class="container-fluid mt-5 mb-5">
-        <h2 class="mb-5" style="text-align: center; border-bottom: 2px solid black;">Products</h2>
-        <div class="row">
+        <h2 class="mb-5" style="text-align: center; border-bottom: 2px solid black;">Clothes</h2>
+        <div class="row row-cols-4">
             {% for product in products %}
                 <div class="card ml-5 mb-5" style="width: 18rem;    box-shadow: 10px 10px 5px grey;">
                     <a href="{% url 'ecom:product' product.slug|slugify %}">
@@ -12,10 +12,10 @@
                     </a>
                     <div class="card-body">
                         <a href="{% url 'ecom:product' product.slug|slugify %}" style="color: black">
-                            <h4 class="card-title">{{ product.name }}</h4>
+                            <h4 class="card-title" style="color: blue">{{ product.name }}</h4>
                         </a>
-                            <h5 class="card-title">RS.{{ product.price }}</h5>
-                            <a href="{% url 'ecom:add_to_cart' product.slug|slugify %}" class="btn btn-success">Add to card</a>
+                            <h5 class="card-title" style="color: blue">RS.{{ product.price }}</h5>
+                            <a href="{% url 'ecom:add_to_cart' product.slug|slugify %}" class="btn btn-primary">Add to card</a>
                     </div>
                 </div>
             {% endfor %}

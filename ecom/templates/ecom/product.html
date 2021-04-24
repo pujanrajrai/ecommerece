@@ -1,33 +1,71 @@
 {% extends 'ecom/base.html' %}
 {% block body %}
-
-    {% for product in products %}
-        <div class="container-fluid mt-5 mb-5">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="card-group">
-                        <div class="card ml-2" style="width: 18rem;">
-                            <img class="card-img-top image-resize3"
-                                 src="{{ product.product_image.url }}" alt="Card image cap">
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-6" style="background-color:#ffffff;">
-                    <div class="card-group">
-                        <div class="card ml-2" style="width: 18rem;">
-                            <h1 style="border-bottom: 2px solid black">{{ product.name }}</h1>
-                            <h4 style="border-bottom: 2px solid black">Category: {{ product.category }}</h4>
-                            <h2 style="border-bottom: 2px solid black">Rs.{{ product.price }}</h2>
-                            <h2 style="border-bottom: 2px solid black">Stock: {{ product.stock }}</h2>
-                            <div style="border: 1px solid black">{{ product.description|safe }}</div><br>
-                            <a href="{% url 'ecom:add_to_cart' product.slug|slugify %}" class="btn btn-success">Add to card</a>
-
-
-
-                        </div>
-                    </div>
+    <div class="hero">
+    <div class="row">
+        <div class="col">
+            <div class="slider">
+                {% for product in products %}
+                <div class="preview">
+                    <img src="{{ product.product_image.url }}" id="imagebox" alt="">
                 </div>
             </div>
         </div>
-    {% endfor %}
+        <div class="col">
+            <div class="content">
+                <h2> {{ product.name}}</h2>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-half-o"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p class="price">Rs {{ product.price }}</p>
+                    <p>{{ product.description|striptags }}</p>
+                </p>
+                <a href="{% url 'ecom:add_to_cart' product.slug|slugify %}" class="btn btn-success">Add to card</a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+</div>
+<br><br><br><br>
+<script>
+    function clickme(smallImg) {
+        var fullImg = document.getElementById('imagebox');
+        fullImg.src = smallImg.src;
+
+    }
+</script>
+
+{#    {% for product in products %}#}
+{#        <div class="container-fluid mt-5 mb-5">#}
+{#            <div class="row">#}
+{#                <div class="col-sm-6">#}
+{#                    <div class="card-group">#}
+{#                        <div class="card ml-2" style="width: 18rem;">#}
+{#                            <img class="card-img-top image-resize3"#}
+{#                                 src="{{ product.product_image.url }}" alt="Card image cap">#}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="col-sm-6" style="background-color:#ffffff;">#}
+{#                    <div class="card-group">#}
+{#                        <div class="card ml-2" style="width: 18rem;">#}
+{#                            <h1 style="border-bottom: 2px solid black">{{ product.name }}</h1>#}
+{#                            <h4 style="border-bottom: 2px solid black">Category: {{ product.category }}</h4>#}
+{#                            <h2 style="border-bottom: 2px solid black">Rs.{{ product.price }}</h2>#}
+{#                            <h2 style="border-bottom: 2px solid black">Stock: {{ product.stock }}</h2>#}
+{#                            <div style="border: 1px solid black">{{ product.description|safe }}</div><br>#}
+{#                            <a href="{% url 'ecom:add_to_cart' product.slug|slugify %}" class="btn btn-success">Add to card</a>#}
+{##}
+{##}
+{##}
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    {% endfor %}#}
 {% endblock %}

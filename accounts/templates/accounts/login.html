@@ -1,66 +1,121 @@
-{% extends 'accounts/base.html' %}
-{% block body %}
-    <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100 p-t-50 p-b-90">
-                <form class="login100-form validate-form flex-sb flex-w" id="login-form" method="post">
-                    {% csrf_token %}
-                    <span class="login100-form-title p-b-51">
-						login
-					</span>
-                    {% if form.errors %}
-                        {% for field in form %}
-                            {% for error in field.errors %}
-                                <div class="alert alert-danger" role="alert">
-                                    <strong>{{ error|escape }}</strong>
-                                </div>
 
-                            {% endfor %}
-                        {% endfor %}
-                        {% for error in form.non_field_errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error|escape }}</strong>
-                            </div>
-                        {% endfor %}
-                    {% endif %}
+<html>
+<head>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
 
-                    {% if errors %}<div class="alert alert-danger">
-                        <strong>{{ errors }}</strong>
-                    </div>{% endif %}
-                    <div class="wrap-input100 validate-input m-b-16" data-validate="Email is required">
-                        <input class="input100" type="email" name="email" placeholder="Email" id="email">
-                        <span class="focus-input100"></span>
-                    </div>
-                    <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
-                        <input class="input100" type="password" name="password" placeholder="Enter Password" id="pass1">
-                        <span class="focus-input100"></span>
-                    </div>
+        .login-form {
+            height: 100%;
+            width: 100%;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url(clothes.jpg.jpg);
+            background-position: center;
+            background-size: cover;
+            position: absolute;
+        }
 
-                    <div class="flex-sb-m w-full p-t-3 p-b-24">
-                        <div class="contact100-form-checkbox">
-                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                            <label class="label-checkbox100" for="ckb1">
-                                Remember me
-                            </label>
-                        </div>
+        .form-box {
+            width: 380px;
+            height: 480px;
+            position: relative;
+            margin: 6% auto;
+            background: #fff;
+            padding: 5px;
+        }
 
-                        <div>
-                            <a href="#" class="txt1">
-                                Forgot?
-                            </a>
-                        </div>
-                    </div>
+        .button-box {
+            width: 220px;
+            margin: 35px auto;
+            position: relative;
+            box-shadow: 0 0 20px 9px #ff61241f;
+            border-radius: 30px;
+        }
 
-                    <div class="container-login100-form-btn m-t-17">
-                        <button class="login100-form-btn" id="btn">
-                            Login
-                        </button>
-                    </div>
+        .toggle-btn {
+            padding: 10px 30px;
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+            outline: none;
+            position: relative;
+        }
 
-                </form>
-            </div>
+        #btn {
+            top: 0;
+            left: 0;
+            position: absolute;
+            width: 110px;
+            height: 100%;
+            background: linear-gradient(to right, #ff105f, #ffad06);
+            border-radius: 30px;
+            transition: .5s;
+        }
+
+        .group {
+            top: 180px;
+            position: absolute;
+            width: 280px;
+            transition: .5s;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 10px 0;
+            margin: 5px 0;
+            border-left: 0;
+            border-top: 0;
+            border-right: 0;
+            border-bottom: 1px solid #999;
+            outline: none;
+            background: transparent;
+        }
+
+        .submit-btn {
+            width: 85%;
+            padding: 10px 30px;
+            cursor: pointer;
+            display: block;
+            margin: auto;
+            background: linear-gradient(to right, #ff105f, #ffad06);
+            border: 0;
+            outline: none;
+            border-radius: 30px;
+        }
+
+        .check-box {
+            margin: 30px 10px 30px 0;
+        }
+
+        span {
+            color: #777;
+            font-size: 12px;
+            bottom: 68px;
+            position: absolute;
+        }
+
+    </style>
+</head>
+<body>
+<div class="login-form">
+    <div class="form-box">
+        <div class="button-box">
+            <div id="btn"></div>
+            <button type="button" class="toggle-btn">Log In</button>
         </div>
+         <div class="button-box">
+            {{ errors }}
+        </div>
+        <form id="login" class="group" method="post">
+            {% csrf_token %}
+            <input type="email" class="input-field" name="email" placeholder="email" required>
+            <input type="password" class="input-field" name="password" placeholder="Enter Password" required>
+            <input type="checkbox" class="check-box"><span>Remember Password</span>
+            <button type="submit" class="submit-btn">Log In</button>
+        </form>
     </div>
-    <div id="dropDownSelect1"></div>
-
-{% endblock %}
+</div>
+</body>
+</html>
